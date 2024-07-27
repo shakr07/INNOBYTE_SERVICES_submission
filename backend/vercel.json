@@ -1,10 +1,24 @@
 {
+  "version": 2,
   "builds": [
-    { "src": "backend/**/*.js", "use": "@vercel/node" },
-    { "src": "blog_app/**/*.js", "use": "@vercel/static" }
+    {
+      "src": "backend/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "blog_app/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "backend/api.js" },
-    { "src": "/(.*)", "dest": "blog_app/index.html" }
+    {
+      "src": "/(register|login|verify|books.*)",
+      "dest": "/backend/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/blog_app/$1"
+    }
   ]
 }
