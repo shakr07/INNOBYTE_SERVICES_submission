@@ -1,5 +1,36 @@
 {
-   "rewrites":  [
-       {"source": "/(.*)", "destination": "/"}
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "blog_app/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/register",
+      "dest": "/backend/index.js"
+    },
+    {
+      "src": "/login",
+      "dest": "/backend/index.js"
+    },
+    {
+      "src": "/verify",
+      "dest": "/backend/index.js"
+    },
+    {
+      "src": "/books/(.*)",
+      "dest": "/backend/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/blog_app/$1"
+    }
+  ]
 }
