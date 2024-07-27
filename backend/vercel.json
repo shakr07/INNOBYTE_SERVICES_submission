@@ -32,5 +32,6 @@
       "src": "/(.*)",
       "dest": "/blog_app/$1"
     }
+    { "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
   ]
 }
