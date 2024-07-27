@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './starting.css'; 
+import "./starting.css";
 import { MdOutlinePassword } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { TbLogin2 } from "react-icons/tb";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,16 +22,14 @@ const Login = () => {
       });
       if (response.data.token) {
         navigate("/books");
-      }else{
-        alert("wrong password");
+      } else {
+        alert("Wrong password");
       }
     } catch (err) {
-
-      console.error(err);
-      if(err.request.status==401){
-        alert("Wrong password or Wrong Email id");
-      }
-      else{
+      console.error("Login error:", err);
+      if (err.response && err.response.status === 401) {
+        alert("Wrong password or email ID");
+      } else {
         alert(err.message);
       }
     }
@@ -73,7 +72,6 @@ const Login = () => {
                 transition: "color 0.3s",
               }}
             />
-
             <input
               type="password"
               placeholder="Enter Password"

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./starting.css"; // Import your custom CSS file for styling
-import { FcPortraitMode } from "react-icons/fc";
-import { FcSignature } from "react-icons/fc";
-import { MdOutlinePassword } from "react-icons/md";
-import { MdEmail } from "react-icons/md";
+import "./starting.css";
+import { FcPortraitMode, FcSignature } from "react-icons/fc";
+import { MdOutlinePassword, MdEmail } from "react-icons/md";
+
 const Registration = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,15 +21,11 @@ const Registration = () => {
       });
       navigate("/login");
     } catch (err) {
-      // if(err.status==420){
-      //   alert("fhsjhd")
-      // }
       if (err.response && err.response.status === 420) {
-        //  user already exists
         alert(err.response.data.error);
+      } else {
+        alert(err.message);
       }
-      else
-      {alert(err)}
     }
   };
 
@@ -38,19 +33,13 @@ const Registration = () => {
     <div className="auth-container d-flex justify-content-center align-items-center">
       <div className="card auth-card">
         <FcPortraitMode
-          style={{
-            fontSize: "24px",
-            transition: "color 0.3s",
-          }}
+          style={{ fontSize: "24px", transition: "color 0.3s" }}
         />
         <h2 className="text-center mb-4">Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <FcSignature
-              style={{
-                fontSize: "24px",
-                transition: "color 0.3s",
-              }}
+              style={{ fontSize: "24px", transition: "color 0.3s" }}
             />
             <input
               type="text"
@@ -80,14 +69,14 @@ const Registration = () => {
             />
           </div>
           <div className="mb-3">
-           <MdOutlinePassword
+            <MdOutlinePassword
               style={{
                 fontSize: "24px",
                 color: "#ef4444",
                 cursor: "pointer",
                 transition: "color 0.3s",
               }}
-              />
+            />
             <input
               type="password"
               placeholder="Enter Password"
@@ -115,3 +104,4 @@ const Registration = () => {
 };
 
 export default Registration;
+``;
